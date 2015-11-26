@@ -2,6 +2,7 @@ import tornado.ioloop
 import tornado.web
 import json
 import os
+import random
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -16,17 +17,21 @@ class Collector(tornado.web.RequestHandler):
 
 class getInfo(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
-        movie = {"id": "1", "name": "movie_name", "image":"movie_image"}
-        recipe = {"id": "1", "name": "movie_name", "image":"movie_image"}
+        movie = {"id": random.randrange(5), "name": random.randrange(5), "image": "movie_image"}
+        recipe = {"id": random.randrange(5), "name": random.randrange(5), "image": "movie_image"}
         json_dict = {"movie": movie, "recipe": recipe}
         self.finish(json.dump(json_dict, self))
 
 
 class postRate(tornado.web.RequestHandler):
     def post(self, *args, **kwargs):
-        the_json = json.dumps(kwargs)
-        print(the_json)
-        self.write(the_json)
+        print('POST')
+        print('FOODID POST EREZ')
+        print(self.get_argument('foodId'))
+        print('MOVIEID')
+        print(self.get_argument('movieId'))
+        print('RATE')
+        print(self.get_argument('rate'))
 
 
 settings = dict(
