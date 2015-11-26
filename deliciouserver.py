@@ -30,9 +30,9 @@ movies = [['Pulp Fiction', 'http://www.movieposterdb.com/posters/07_10/1994/1109
 
 
 for i in range(len(movies)):
-    new_path = "static/tmp/" + str(movies[i][0]).strip().lower() # todo remove
+    new_path = "static/tmp/" + str(movies[i][0]).strip().lower()
     movies[i][1] = new_path
-    # urllib.request.urlretrieve(movies[i][1], new_path) # todo remove
+    # urllib.request.urlretrieve(movies[i][1], new_path)
     # print(new_path + " Done!")
     print(movies[i][1])
 
