@@ -10,14 +10,14 @@ function reloadPage()
     var info = getInfo();
     document.getElementById("movieName").innerHTML="HollyMolly";
     document.getElementById("foodName").innerHTML='guacamole';
-    document.getElementById("moviePic").src = "https://static.pexels.com/photos/7976/pexels-photo.jpg";
+    document.getElementById("moviePic").src = "http://ia.media-imdb.com/images/M/MV5BMTUyNzgxNjg2M15BMl5BanBnXkFtZTgwMTY1NDI1NjE@._V1__SX1303_SY615_.jpg";
     document.getElementById("foodPic").src = "https://static.pexels.com/photos/7976/pexels-photo.jpg";
 }
 
-function sendRate(rate)
+function sendRate(rate, movieId, foodId)
 {
     //var data = '{ "curMovieId":' + curMovieId + ', "curFoodId":' + curFoodId + ',"rate":' + rate + '}';
-    var data = {movieId:curMovieId, foodId:curFoodId, shits:rate};
+    var data = {movieId:1, foodId:2, rate:rate};
     $.get('/postRate', data, reloadPage());
 }
 
