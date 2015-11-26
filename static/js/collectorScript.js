@@ -1,7 +1,8 @@
 /**
  * Created by Erez Levanon on 25/11/2015.
  */
-var foodId = movieId = 0;
+var foodId = 1;
+var movieId = 2;
 reloadPage();
 
 function reloadPage()
@@ -24,7 +25,7 @@ function getInfo()
 {
     var info = $.get('/getInfo');
     foodId = info.movieId;
-    movieId = info.movieId
+    movieId = info.movieId;
 }
 
 
