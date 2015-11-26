@@ -3,6 +3,10 @@ import tornado.web
 import json
 import os
 import random
+import sqlite3
+
+
+movie_db = sqlite3.connect("data/dbv1")
 
 
 class MainHandler(tornado.web.RequestHandler):
