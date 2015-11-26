@@ -67,7 +67,7 @@ class getInfo(tornado.web.RequestHandler):
         (movie_name, movie_image) = movies[random.randrange(20)]
         (food_name, food_image) = foods[random.randrange(20)]
         new_path = "static/tmp/" + str(movie_name).strip().lower()
-        urllib.request.urlretrieve(movie_image, "static/tmp/" + new_path)
+        urllib.request.urlretrieve(movie_image, new_path)
         json_dict = {"movieId": random.randrange(5), "movieName": movie_name, "movieImage": new_path,
                      "recipeId": random.randrange(5), "recipeName": food_name, "recipeImage": food_image}
         self.finish(json.dump(json_dict, self))
