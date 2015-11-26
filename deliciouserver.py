@@ -25,11 +25,10 @@ class getInfo(tornado.web.RequestHandler):
 class postRate(tornado.web.RequestHandler):
     def post(self, *args, **kwargs):
         print('POST')
-        print(self.request.data)
-        print('DATA')
-        print(self.get_argument('data'))
-        print('BODY')
-        print(self.get_argument('body'))
+        print('FOODID POST EREZ')
+        print(self.get_argument('foodId'))
+        print('MOVIEID')
+        print(self.get_argument('movieId'))
         print('RATE')
         print(self.get_argument('rate'))
         the_json_kwargs = json.dumps(kwargs)
@@ -39,7 +38,7 @@ class postRate(tornado.web.RequestHandler):
 
     def get(self, *args, **kwargs):
         print('GET')
-        print('FOODID')
+        print('FOODID GET EREZ')
         print(self.get_argument('foodId'))
         print('MOVIEID')
         print(self.get_argument('movieId'))
