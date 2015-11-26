@@ -29,14 +29,6 @@ movies = [['Pulp Fiction', 'http://www.movieposterdb.com/posters/07_10/1994/1109
           ['City of God', 'http://www.movieposterdb.com/posters/05_01/2002/0317248/l_3292_0317248_c3193097.jpg']]
 
 
-for i in range(len(movies)):
-    new_path = "static/tmp/" + str(movies[i][0]).strip().lower() # todo remove
-    movies[i][1] = new_path
-    # urllib.request.urlretrieve(movies[i][1], new_path) # todo remove
-    # print(new_path + " Done!")
-    print(movies[i][1])
-
-
 foods = [['Black and White Affogato', 'http://tastykitchen.com/recipes/wp-content/uploads/sites/2/2011/05/Black-and-White-Affogato1-410x546.jpg'],
          ['Marvelous Meatballs!', 'http://tastykitchen.com/recipes/wp-content/uploads/sites/2/2011/04/Meatballs1-410x307.jpg'],
          ["Lia's Dark Chocolate Truffles", 'http://tastykitchen.com/recipes/wp-content/uploads/sites/2/2010/12/5240497441_3188a021b4_o-420x280.jpg'],
