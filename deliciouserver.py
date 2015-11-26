@@ -10,7 +10,7 @@ class MainHandler(tornado.web.RequestHandler):
 
 class Collector(tornado.web.RequestHandler):
     def get(self):
-        self.render("html/collector.html")
+        self.render("collector.html")
 
 
 class getInfo(tornado.web.RequestHandler):
