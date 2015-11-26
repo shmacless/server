@@ -23,7 +23,9 @@ function sendRate(rate, movieId, foodId)
 
 function getInfo()
 {
-    var info = $.get('/getInfo');
+    var info = $.get('/getInfo', function(data){
+        alert(data);
+    });
     //curFoodId = info.movieId;
     //curMovieId = info.movieId;
 }
