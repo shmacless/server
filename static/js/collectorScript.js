@@ -8,6 +8,7 @@ reloadPage();
 function reloadPage()
 {
     $.get('/getInfo', function(data){
+        alert(data["recipeId"]);
         curFoodId = data["recipeId"];
         curMovieId = data["movieId"];
         document.getElementById("movieName").innerHTML= data["movieName"];
@@ -17,7 +18,7 @@ function reloadPage()
     });
 }
 
-function sendRate(rate, movieId, foodId)
+function sendRate(rate)
 {
     var data = {movieId:curMovieId, foodId:curFoodId, rate:rate};
     $.post('/postRate', data, reloadPage());
