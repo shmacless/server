@@ -1,6 +1,7 @@
 import tornado.ioloop
 import tornado.web
 import json
+import os
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -26,12 +27,17 @@ class postRate(tornado.web.RequestHandler):
         self.write(json.loads(kwargs))
 
 
+settings = dict(
+        static_path = os.path.join(os.path.dirname(__file__), "static")
+    )
+
+
 def make_app():
     return tornado.web.Application([
         (r"/", Collector),
         (r"/getInfo", getInfo),
         (r"/postRate", postRate),
-    ])
+    ], **settings)
 
 
 if __name__ == "__main__":
