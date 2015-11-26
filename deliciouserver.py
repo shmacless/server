@@ -3,15 +3,11 @@ import tornado.web
 import json
 import os
 import random
-import sqlite3
-
-
-movie_db = sqlite3.connect("data/dbv1")
 
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write("DeliciouSeret")
+        self.render("main.html")
 
 
 class Collector(tornado.web.RequestHandler):
@@ -48,6 +44,7 @@ def make_app():
         (r"/", Collector),
         (r"/getInfo", getInfo),
         (r"/postRate", postRate),
+        (r"/mainSite", MainHandler),
     ], **settings)
 
 
