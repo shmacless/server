@@ -35,9 +35,9 @@ class postRate(tornado.web.RequestHandler):
 
     def get(self, *args, **kwargs):
         print('GET')
-        print(self.get_argument('data'))
-        print(self.get_argument('body'))
-        print(self.get_argument('rate'))
+        print(self.get_argument('foodId'))
+        print(self.get_argument('movieId'))
+        print(self.get_argument('shits'))
         the_json_kwargs = json.dumps(kwargs)
         the_json_args = json.dumps(kwargs)
         print(the_json_kwargs)
