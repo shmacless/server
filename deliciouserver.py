@@ -17,9 +17,7 @@ class Collector(tornado.web.RequestHandler):
 
 class getInfo(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
-        movie = {"id": random.randrange(5), "name": random.randrange(5), "image": "movie_image"}
-        recipe = {"id": random.randrange(5), "name": random.randrange(5), "image": "movie_image"}
-        json_dict = {"movie": movie, "recipe": recipe}
+        json_dict = {"movieId": random.randrange(5), "movieName": random.randrange(5), "movieImage": "movie_image", "recipeId": random.randrange(5), "recipeName": random.randrange(5), "recipeImage": "movie_image"}
         self.finish(json.dump(json_dict, self))
 
 
