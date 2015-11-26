@@ -27,6 +27,26 @@ movies = [['Pulp Fiction', 'http://ia.media-imdb.com/images/M/MV5BMTkxMTA5OTAzMl
               ['City of God', 'http://ia.media-imdb.com/images/M/MV5BMjA4ODQ3ODkzNV5BMl5BanBnXkFtZTYwOTc4NDI3._V1_SX214_AL_.jpg']]
 
 
+foods = [['Lescó', 'http://tastykitchen.com/recipes/soups/lesco/'],
+         ['Marvelous Meatballs!', 'http://tastykitchen.com/recipes/main-courses/marvelous-meatballs/'],
+         ['Spice Rubbed Flank Steak', 'http://tastykitchen.com/recipes/main-courses/spice-rubbed-flank-steak/'],
+         ['Taco Sauce', 'http://tastykitchen.com/recipes/condiments/taco-sauce/'],
+         ['Lentil Vegetable Soup with WhippedFeta', 'http://tastykitchen.com/recipes/soups/lentil-vegetable-soup-with-whipped-feta/'],
+         ['Lentil, Rice, and Raisin Pilaf', 'http://tastykitchen.com/recipes/sidedishes/lentil-rice-and-raisin-pilaf/'],
+         ['Roasted Garlic Dungeness Crab', 'http://tastykitchen.com/recipes/main-courses/roasted-garlic-dungeness-crab/'],
+         ['Whole Wheat Peanut Butter Chocolate Bread', 'http://tastykitchen.com/recipes/breads/whole-wheat-peanut-butter-chocolate-bread/'],
+         ['Spicy Chipotle Shrimp Skewers', 'http://tastykitchen.com/recipes/main-courses/spicy-chipotle-shrimp-skewers/'],
+         ['Szechwan Green Beans', 'http://tastykitchen.com/recipes/main-courses/szechwan-green-beans/'],
+         ['Spinach and Mushroom Lasagna', 'http://tastykitchen.com/recipes/main-courses/spinach-and-mushroom-lasagna/'],
+         ['Roasted Brussels Sprouts with Winter Squash', 'http://tastykitchen.com/recipes/sidedishes/roasted-brussels-sprouts-with-winter-squash/'],
+         ['Sweet and Savoury Stir Fried Pork and Cashews', 'http://tastykitchen.com/recipes/main-courses/sweet-and-savoury-stir-fried-pork-and-cashews/'],
+         ['Lentil, Walnut and Raisin Salad with Red Peppers', 'http://tastykitchen.com/recipes/salads/lentil-walnut-and-raisin-salad-with-red-peppers/'],
+         ['Taco Flavored Ground Turkey', 'http://tastykitchen.com/recipes/main-courses/taco-flavored-ground-turkey/'],
+         ['Light BBQ Chicken Pizza', 'http://tastykitchen.com/recipes/main-courses/light-bbq-chicken-pizza/'],
+         ['Pecan Pie Caramel Cheesecake', 'http://tastykitchen.com/recipes/desserts/pecan-pie-caramel-cheesecake/'],
+         ['Quick and Easy Cinnamon Walnut Bread', 'http://tastykitchen.com/recipes/breads/quick-and-easy-cinnamon-walnut-bread/']]
+
+
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("main.html")
@@ -40,20 +60,20 @@ class Collector(tornado.web.RequestHandler):
 class getInfo(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
         (movie_name, movie_image) = movies[random.randrange(20)]
+        (food_name, food_image) = foods[random.randrange(20)]
         json_dict = {"movieId": random.randrange(5), "movieName": movie_name, "movieImage": movie_image,
-                     "recipeId": random.randrange(5), "recipeName": random.randrange(5), "recipeImage": random.randrange(5)}
+                     "recipeId": random.randrange(5), "recipeName": food_name, "recipeImage": food_image}
         self.finish(json.dump(json_dict, self))
 
 
 class postRate(tornado.web.RequestHandler):
     def post(self, *args, **kwargs):
         print('POST')
-        print('FOODID POST EREZ')
-        print(self.get_argument('foodId'))
-        print('MOVIEID')
-        print(self.get_argument('movieId'))
-        print('RATE')
-        print(self.get_argument('rate'))
+        food_name = self.get_argument('foodId')
+        movie_name = self.get_argument('movieId')
+        rate = self.get_argument('rate')
+        with open("static/data/ratingDB", "a") as ratingDB:
+            ratingDB.write("[" + food_name + ", " + movie_name + ", " + rate + "]" + ", \n")
         self.finish()
 
 
