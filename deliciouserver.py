@@ -23,7 +23,7 @@ class getInfo(tornado.web.RequestHandler):
 
 
 class postRate(tornado.web.RequestHandler):
-    def get(self, *args, **kwargs):
+    def post(self, *args, **kwargs):
         self.write(json.loads(kwargs))
 
 
