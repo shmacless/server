@@ -2,6 +2,7 @@ import tornado.ioloop
 import tornado.web
 import json
 import os
+import random
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -11,35 +12,38 @@ class MainHandler(tornado.web.RequestHandler):
 
 class Collector(tornado.web.RequestHandler):
     def get(self):
-        # items = ["Item 1", "Item 2", "Item 3"]
-        self.render("collector.html")  # , title="My title", items=items)
+        self.render("collector.html")
 
 
 class getInfo(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
-        movie = {"id": "1", "name": "movie_name", "image":"movie_image"}
-        recipe = {"id": "1", "name": "movie_name", "image":"movie_image"}
-        json_dict = {"movie": movie, "recipe": recipe}
+        json_dict = {"movieId": random.randrange(5), "movieName": random.randrange(5), "movieImage": random.randrange(5),
+                     "recipeId": random.randrange(5), "recipeName": random.randrange(5), "recipeImage": random.randrange(5)}
         self.finish(json.dump(json_dict, self))
 
 
-class postRating(tornado.web.RequestHandler):
+class postRate(tornado.web.RequestHandler):
     def post(self, *args, **kwargs):
-        pass
+        print('POST')
+        print('FOODID POST EREZ')
+        print(self.get_argument('foodId'))
+        print('MOVIEID')
+        print(self.get_argument('movieId'))
+        print('RATE')
+        print(self.get_argument('rate'))
+        self.finish()
 
 
-settings = {
-    "static_path": os.path.join(os.path.dirname(__file__), "static"),
-    "cookie_secret": "__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
-    "login_url": "/login",
-    "xsrf_cookies": True,
-}
+settings = dict(
+    static_path=os.path.join(os.path.dirname(__file__), "static")
+)
+
 
 def make_app():
     return tornado.web.Application([
         (r"/", Collector),
         (r"/getInfo", getInfo),
-        (r"/postRating", postRating),
+        (r"/postRate", postRate),
     ], **settings)
 
 

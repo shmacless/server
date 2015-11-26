@@ -1,45 +1,33 @@
 /**
  * Created by Erez Levanon on 25/11/2015.
  */
-var imageId = movieId = 0;
+var curFoodId = 1;
+var curMovieId = 2;
 reloadPage();
 
 function reloadPage()
 {
-    var info = getInfo();
-    document.getElementById("movieName").innerHTML="HollyMolly";
-    document.getElementById("foodName").innerHTML='guacamole';
-    document.getElementById("moviePic").src = "https://static.pexels.com/photos/7976/pexels-photo.jpg";
-    document.getElementById("foodPic").src = "https://static.pexels.com/photos/7976/pexels-photo.jpg";
+    $.get('/getInfo', function(data){
+        data = $.parseJSON(data);
+        curFoodId = data["recipeId"];
+        curMovieId = data["movieId"];
+        document.getElementById("movieName").innerHTML= data["movieName"];
+        document.getElementById("foodName").innerHTML= data["recipeName"];
+        document.getElementById("moviePic").src = data["movieImage"];
+        document.getElementById("foodPic").src = data["recipeImage"];
+    });
 }
 
 function sendRate(rate)
 {
-    var data = '{ "movieId":' + movieId + ', "imageId":' + imageId + ',"rate":' + rate + '}';
-    $.post('/postRate', data, reloadPage());
+    var data = {movieId:curMovieId, foodId:curFoodId, rate:rate};
+    $.post('/postRate', data, function(){reloadPage()});
 }
 
-function getInfo()
-{
-    var data = $.get('/getInfo');
-}
-
-
-
-
-$('#rate1').on('click', function(e) {
+$('#voteMatch').on('click', function(e) {
     sendRate(1);
 });
 
-$('#rate2').on('click', function(e) {
-    sendRate(2);
-});
-$('#rate3').on('click', function(e) {
-    sendRate(3);
-});
-$('#rate4').on('click', function(e) {
-    sendRate(4);
-});
-$('#rate5').on('click', function(e) {
-    sendRate(5);
+$('#voteNoMatch').on('click', function(e) {
+    sendRate(-1);
 });
