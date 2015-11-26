@@ -1,3 +1,5 @@
+import urllib
+
 import tornado.ioloop
 import tornado.web
 import json
@@ -5,26 +7,34 @@ import os
 import random
 
 
-movies = [['Pulp Fiction', 'http://ia.media-imdb.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SX214_AL_.jpg'],
-              ['Good Will Hunting', 'http://ia.media-imdb.com/images/M/MV5BMTk0NjY0Mzg5MF5BMl5BanBnXkFtZTcwNzM1OTM2MQ@@._V1_SY317_CR1,0,214,317_AL_.jpg'],
-              ['The Big Lebowski', 'http://ia.media-imdb.com/images/M/MV5BMTQ0NjUzMDMyOF5BMl5BanBnXkFtZTgwODA1OTU0MDE@._V1_SX214_AL_.jpg'],
-              ['V for Vendetta', 'http://ia.media-imdb.com/images/M/MV5BOTI5ODc3NzExNV5BMl5BanBnXkFtZTcwNzYxNzQzMw@@._V1_SY317_CR0,0,214,317_AL_.jpg'],
-              ['Fight Club', 'http://ia.media-imdb.com/images/M/MV5BMjIwNTYzMzE1M15BMl5BanBnXkFtZTcwOTE5Mzg3OA@@._V1_SX214_AL_.jpg'],
-              ['Gladiator', 'http://ia.media-imdb.com/images/M/MV5BMjA4ODQ3ODkzNV5BMl5BanBnXkFtZTYwOTc4NDI3._V1_SX214_AL_.jpg'],
-              ['Interstellar', 'http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX214_AL_.jpg'],
-              ['Into the Wild', 'http://ia.media-imdb.com/images/M/MV5BMTAwNDEyODU1MjheQTJeQWpwZ15BbWU2MDc3NDQwNw@@._V1_SY317_CR0,0,214,317_AL_.jpg'],
-              ['The Imitation Game', 'http://ia.media-imdb.com/images/M/MV5BNDkwNTEyMzkzNl5BMl5BanBnXkFtZTgwNTAwNzk3MjE@._V1_SY317_CR0,0,214,317_AL_.jpg'],
-              ['The Truman Show', 'http://ia.media-imdb.com/images/M/MV5BMTg4NTU3NTAyMF5BMl5BanBnXkFtZTgwNjYwNzc3NjE@._V1_SX214_AL_.jpg'],
-              ['Toy Story 3', 'http://ia.media-imdb.com/images/M/MV5BMTgxOTY4Mjc0MF5BMl5BanBnXkFtZTcwNTA4MDQyMw@@._V1_SY317_CR5,0,214,317_AL_.jpg'],
-              ['Shawshank Redemption', 'http://ia.media-imdb.com/images/M/MV5BODU4MjU4NjIwNl5BMl5BanBnXkFtZTgwMDU2MjEyMDE@._V1_SX214_AL_.jpg'],
-              ['Forrest Gump', 'http://ia.media-imdb.com/images/M/MV5BMTQwMTA5MzI1MF5BMl5BanBnXkFtZTcwMzY5Mzg3OA@@._V1_SX214_AL_.jpg'],
-              ['Matrix', 'http://ia.media-imdb.com/images/M/MV5BMTkxNDYxOTA4M15BMl5BanBnXkFtZTgwNTk0NzQxMTE@._V1_SX214_AL_.jpg'],
-              ['Life Is Beautiful', 'http://ia.media-imdb.com/images/M/MV5BMTQwMTM2MjE4Ml5BMl5BanBnXkFtZTgwODQ2NTYxMTE@._V1_SX214_AL_.jpg'],
-              ['Inside Out', 'http://ia.media-imdb.com/images/M/MV5BOTgxMDQwMDk0OF5BMl5BanBnXkFtZTgwNjU5OTg2NDE@._V1_SX214_AL_.jpg'],
-              ['Snatch', 'http://ia.media-imdb.com/images/M/MV5BMTk5NzE0MDQyNl5BMl5BanBnXkFtZTcwNzk4Mjk3OA@@._V1_SY317_CR2,0,214,317_AL_.jpg'],
-              ['The Good, the Bad and the Ugly', 'http://ia.media-imdb.com/images/M/MV5BOTQ5NDI3MTI4MF5BMl5BanBnXkFtZTgwNDQ4ODE5MDE@._V1_SX214_AL_.jpg'],
-              ['Goodfellas', 'http://ia.media-imdb.com/images/M/MV5BMTY2OTE5MzQ3MV5BMl5BanBnXkFtZTgwMTY2NTYxMTE@._V1_SX214_AL_.jpg'],
-              ['City of God', 'http://ia.media-imdb.com/images/M/MV5BMjA4ODQ3ODkzNV5BMl5BanBnXkFtZTYwOTc4NDI3._V1_SX214_AL_.jpg']]
+movies = [['Pulp Fiction', 'http://www.movieposterdb.com/posters/07_10/1994/110912/l_110912_55345443.jpg'],
+          ['Good Will Hunting', 'http://www.movieposterdb.com/posters/10_09/1997/119217/l_119217_a4210c61.jpg'],
+          ['The Big Lebowski', 'http://www.movieposterdb.com/posters/09_02/1998/118715/l_118715_e3aa6190.jpg'],
+          ['V for Vendetta', 'http://www.movieposterdb.com/posters/09_01/2005/434409/l_434409_c7ec1b2f.jpg'],
+          ['Fight Club', 'http://www.movieposterdb.com/posters/09_10/1999/137523/l_137523_657d0c3f.jpg'],
+          ['Gladiator', 'http://www.movieposterdb.com/posters/08_08/2000/172495/l_172495_2cce6a7c.jpg'],
+          ['Interstellar', 'http://www.movieposterdb.com/posters/14_09/2014/816692/l_816692_a074ce1f.jpg'],
+          ['Into the Wild', 'http://www.movieposterdb.com/posters/08_03/2007/758758/l_758758_cf9ee8b4.jpg'],
+          ['The Imitation Game', 'http://www.movieposterdb.com/posters/14_09/2014/2084970/l_2084970_899fb82b.jpg'],
+          ['The Truman Show', 'http://www.movieposterdb.com/posters/09_07/1998/120382/l_120382_d405d245.jpg'],
+          ['Toy Story 3', 'http://www.movieposterdb.com/posters/10_04/2010/435761/l_435761_1e6b9c8e.jpg'],
+          ['Shawshank Redemption', 'http://www.movieposterdb.com/posters/11_08/1994/111161/l_111161_e9ccda65.jpg'],
+          ['Forrest Gump', 'http://www.movieposterdb.com/posters/06_02/1994/0109830/l_94169_0109830_27bf435e.jpg'],
+          ['Matrix', 'http://www.movieposterdb.com/posters/06_11/1999/0133093/l_145384_0133093_fd241228.jpg'],
+          ['Life Is Beautiful', 'http://www.movieposterdb.com/posters/08_05/1997/118799/l_118799_26c03c3f.jpg'],
+          ['Inside Out', 'http://www.movieposterdb.com/posters/15_03/2015/2096673/l_2096673_36bc6f0b.jpg'],
+          ['Snatch', 'http://www.movieposterdb.com/posters/13_11/2000/208092/l_208092_cc5a6788.jpg'],
+          ['The Good, the Bad and the Ugly', 'http://www.movieposterdb.com/posters/08_12/1966/60196/l_60196_7da39a90.jpg'],
+          ['Goodfellas', 'http://www.movieposterdb.com/posters/05_09/1990/0099685/l_50996_0099685_be22f728.jpg'],
+          ['City of God', 'http://www.movieposterdb.com/posters/05_01/2002/0317248/l_3292_0317248_c3193097.jpg']]
+
+
+for i in range(len(movies)):
+    new_path = "static/tmp/" + str(movies[i][0]).strip().lower() # todo remove
+    movies[i][1] = new_path
+    # urllib.request.urlretrieve(movies[i][1], new_path) # todo remove
+    # print(new_path + " Done!")
+    print(movies[i][1])
 
 
 foods = [['Black and White Affogato', 'http://tastykitchen.com/recipes/wp-content/uploads/sites/2/2011/05/Black-and-White-Affogato1-410x546.jpg'],
