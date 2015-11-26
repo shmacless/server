@@ -5,7 +5,6 @@ import tornado.web
 import json
 import os
 import random
-import urllib.request
 
 
 movies = [['Pulp Fiction', 'http://www.movieposterdb.com/posters/07_10/1994/110912/l_110912_55345443.jpg'],
@@ -28,6 +27,14 @@ movies = [['Pulp Fiction', 'http://www.movieposterdb.com/posters/07_10/1994/1109
           ['The Good, the Bad and the Ugly', 'http://www.movieposterdb.com/posters/08_12/1966/60196/l_60196_7da39a90.jpg'],
           ['Goodfellas', 'http://www.movieposterdb.com/posters/05_09/1990/0099685/l_50996_0099685_be22f728.jpg'],
           ['City of God', 'http://www.movieposterdb.com/posters/05_01/2002/0317248/l_3292_0317248_c3193097.jpg']]
+
+
+for i in range(len(movies)):
+    new_path = "static/tmp/" + str(movies[i][0]).strip().lower()
+    movies[i][1] = new_path
+    # urllib.request.urlretrieve(movies[i][1], new_path)
+    # print(new_path + " Done!")
+    print(movies[i][1])
 
 
 foods = [['Black and White Affogato', 'http://tastykitchen.com/recipes/wp-content/uploads/sites/2/2011/05/Black-and-White-Affogato1-410x546.jpg'],
@@ -66,8 +73,6 @@ class getInfo(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
         (movie_name, movie_image) = movies[random.randrange(20)]
         (food_name, food_image) = foods[random.randrange(20)]
-        # new_path = "static/tmp/" + str(movie_name).strip().lower() # todo remove
-        # urllib.request.urlretrieve(movie_image, new_path) # todo remove
         json_dict = {"movieId": random.randrange(5), "movieName": movie_name, "movieImage": movie_image,
                      "recipeId": random.randrange(5), "recipeName": food_name, "recipeImage": food_image}
         self.finish(json.dump(json_dict, self))
