@@ -7,16 +7,18 @@ reloadPage();
 
 function reloadPage()
 {
-    var info = getInfo();
-    document.getElementById("movieName").innerHTML="HollyMolly";
-    document.getElementById("foodName").innerHTML='guacamole';
-    document.getElementById("moviePic").src = "http://ia.media-imdb.com/images/M/MV5BMTUyNzgxNjg2M15BMl5BanBnXkFtZTgwMTY1NDI1NjE@._V1__SX1303_SY615_.jpg";
-    document.getElementById("foodPic").src = "https://static.pexels.com/photos/7976/pexels-photo.jpg";
+    $.get('/getInfo', function(data){
+        curFoodId = data.recipe.id;
+        curMovieId = data.recipe.id;
+        document.getElementById("movieName").innerHTML=data.movie.name;
+        document.getElementById("foodName").innerHTML=data.recipe.name;
+        document.getElementById("moviePic").src = data.movie.image;
+        document.getElementById("foodPic").src = data.recipe.image;
+    });
 }
 
 function sendRate(rate, movieId, foodId)
 {
-    //var data = '{ "curMovieId":' + curMovieId + ', "curFoodId":' + curFoodId + ',"rate":' + rate + '}';
     var data = {movieId:curMovieId, foodId:curFoodId, rate:rate};
     $.post('/postRate', data, reloadPage());
 }
