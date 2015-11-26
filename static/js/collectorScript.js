@@ -1,8 +1,8 @@
 /**
  * Created by Erez Levanon on 25/11/2015.
  */
-var foodId = 1;
-var movieId = 2;
+var curFoodId = 1;
+var curMovieId = 2;
 reloadPage();
 
 function reloadPage()
@@ -16,16 +16,16 @@ function reloadPage()
 
 function sendRate(rate)
 {
-    //var data = '{ "movieId":' + movieId + ', "foodId":' + foodId + ',"rate":' + rate + '}';
-    var data = {movieId:movieId, foodId:foodId, rate:rate};
-    $.post('/postRate', data, reloadPage());
+    //var data = '{ "curMovieId":' + curMovieId + ', "curFoodId":' + curFoodId + ',"rate":' + rate + '}';
+    var data = {movieId:curMovieId, foodId:curFoodId, rate:rate};
+    $.get('/postRate', data, reloadPage());
 }
 
 function getInfo()
 {
     var info = $.get('/getInfo');
-    foodId = info.movieId;
-    movieId = info.movieId;
+    curFoodId = info.movieId;
+    curMovieId = info.movieId;
 }
 
 
