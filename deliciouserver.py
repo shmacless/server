@@ -33,7 +33,8 @@ for i in range(len(movies)):
     new_path = "static/tmp/" + str(movies[i][0]).strip().lower() # todo remove
     movies[i][1] = new_path
     # urllib.request.urlretrieve(movies[i][1], new_path) # todo remove
-    print(new_path + " Done!")
+    # print(new_path + " Done!")
+    print(movies[i][1])
 
 
 foods = [['Black and White Affogato', 'http://tastykitchen.com/recipes/wp-content/uploads/sites/2/2011/05/Black-and-White-Affogato1-410x546.jpg'],
