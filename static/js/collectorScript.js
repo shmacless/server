@@ -10,8 +10,8 @@ function reloadPage()
     $.get('/getInfo', function(data){
         curFoodId = data.recipe.id;
         curMovieId = data.recipe.id;
-        document.getElementById("movieName").innerHTML=data.movie.name;
-        document.getElementById("foodName").innerHTML=data.recipe.name;
+        document.getElementById("movieName").innerHTML= data.movie.name;
+        document.getElementById("foodName").innerHTML= data.recipe.name;
         document.getElementById("moviePic").src = data.movie.image;
         document.getElementById("foodPic").src = data.recipe.image;
     });
@@ -22,18 +22,6 @@ function sendRate(rate, movieId, foodId)
     var data = {movieId:curMovieId, foodId:curFoodId, rate:rate};
     $.post('/postRate', data, reloadPage());
 }
-
-function getInfo()
-{
-    var info = $.get('/getInfo', function(data){
-        alert(data);
-    });
-    //curFoodId = info.movieId;
-    //curMovieId = info.movieId;
-}
-
-
-
 
 $('#rate1').on('click', function(e) {
     sendRate(1);
