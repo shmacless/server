@@ -8,9 +8,7 @@ reloadPage();
 function reloadPage()
 {
     $.get('/getInfo', function(data){
-        alert(data);
         data = $.parseJSON(data);
-        alert(data["recipeId"]);
         curFoodId = data["recipeId"];
         curMovieId = data["movieId"];
         document.getElementById("movieName").innerHTML= data["movieName"];
@@ -23,7 +21,7 @@ function reloadPage()
 function sendRate(rate)
 {
     var data = {movieId:curMovieId, foodId:curFoodId, rate:rate};
-    $.post('/postRate', data, reloadPage());
+    $.post('/postRate', data, function(){reloadPage()});
 }
 
 $('#rate1').on('click', function(e) {
