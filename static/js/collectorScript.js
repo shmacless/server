@@ -17,15 +17,15 @@ function reloadPage()
 function sendRate(rate, movieId, foodId)
 {
     //var data = '{ "curMovieId":' + curMovieId + ', "curFoodId":' + curFoodId + ',"rate":' + rate + '}';
-    var data = {movieId:1, foodId:2, rate:rate};
-    $.get('/postRate', data, reloadPage());
+    var data = {movieId:curMovieId, foodId:curFoodId, rate:rate};
+    $.post('/postRate', data, reloadPage());
 }
 
 function getInfo()
 {
     var info = $.get('/getInfo');
-    curFoodId = info.movieId;
-    curMovieId = info.movieId;
+    //curFoodId = info.movieId;
+    //curMovieId = info.movieId;
 }
 
 
