@@ -24,19 +24,10 @@ function sendRate(rate)
     $.post('/postRate', data, function(){reloadPage()});
 }
 
-$('#rate1').on('click', function(e) {
+$('#voteMatch').on('click', function(e) {
     sendRate(1);
 });
 
-$('#rate2').on('click', function(e) {
-    sendRate(2);
-});
-$('#rate3').on('click', function(e) {
-    sendRate(3);
-});
-$('#rate4').on('click', function(e) {
-    sendRate(4);
-});
-$('#rate5').on('click', function(e) {
-    sendRate(5);
+$('#voteNoMatch').on('click', function(e) {
+    sendRate(-1);
 });
