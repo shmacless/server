@@ -17,7 +17,8 @@ class Collector(tornado.web.RequestHandler):
 
 class getInfo(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
-        json_dict = {"movieId": random.randrange(5), "movieName": random.randrange(5), "movieImage": "movie_image", "recipeId": random.randrange(5), "recipeName": random.randrange(5), "recipeImage": "movie_image"}
+        json_dict = {"movieId": random.randrange(5), "movieName": random.randrange(5), "movieImage": random.randrange(5),
+                     "recipeId": random.randrange(5), "recipeName": random.randrange(5), "recipeImage": random.randrange(5)}
         self.finish(json.dump(json_dict, self))
 
 
@@ -30,11 +31,12 @@ class postRate(tornado.web.RequestHandler):
         print(self.get_argument('movieId'))
         print('RATE')
         print(self.get_argument('rate'))
+        self.finish()
 
 
 settings = dict(
-        static_path = os.path.join(os.path.dirname(__file__), "static")
-    )
+    static_path=os.path.join(os.path.dirname(__file__), "static")
+)
 
 
 def make_app():
