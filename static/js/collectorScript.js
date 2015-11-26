@@ -8,12 +8,12 @@ reloadPage();
 function reloadPage()
 {
     $.get('/getInfo', function(data){
-        curFoodId = data.recipe.id;
-        curMovieId = data.recipe.id;
-        document.getElementById("movieName").innerHTML= data.movie.name;
-        document.getElementById("foodName").innerHTML= data.recipe.name;
-        document.getElementById("moviePic").src = data.movie.image;
-        document.getElementById("foodPic").src = data.recipe.image;
+        curFoodId = data["recipeId"];
+        curMovieId = data["movieId"];
+        document.getElementById("movieName").innerHTML= data["movieName"];
+        document.getElementById("foodName").innerHTML= data["recipeName"];
+        document.getElementById("moviePic").src = data["movieImage"];
+        document.getElementById("foodPic").src = data["recipeImage"];
     });
 }
 
