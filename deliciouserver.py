@@ -11,7 +11,7 @@ class MainHandler(tornado.web.RequestHandler):
 class Collector(tornado.web.RequestHandler):
     def get(self):
         # items = ["Item 1", "Item 2", "Item 3"]
-        self.render("html/collector.html")  # , title="My title", items=items)
+        self.render("collector.html")  # , title="My title", items=items)
 
 
 class getInfo(tornado.web.RequestHandler):
