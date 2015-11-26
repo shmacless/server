@@ -9,6 +9,7 @@ function reloadPage()
 {
     $.get('/getInfo', function(data){
         alert(data);
+        data = $.parseJSON(data);
         alert(data["recipeId"]);
         curFoodId = data["recipeId"];
         curMovieId = data["movieId"];
