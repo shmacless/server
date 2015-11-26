@@ -16,8 +16,8 @@ function reloadPage()
 
 function sendRate(rate)
 {
-    //var data = '{ "movieId":' + movieId + ', "foodId":' + foodId + ',"rate":' + rate + '}';
-    var data = {"movieId":movieId, "foodId":foodId, "rate":rate};
+    var data = '{ "movieId":' + movieId + ', "foodId":' + foodId + ',"rate":' + rate + '}';
+    //var data = {"movieId":movieId, "foodId":foodId, "rate":rate};
     $.post('/postRate', data, reloadPage());
 }
 
