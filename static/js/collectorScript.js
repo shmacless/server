@@ -16,9 +16,9 @@ function reloadPage()
 
 function sendRate(rate)
 {
-    //var data = '{ "curMovieId":' + curMovieId + ', "curFoodId":' + curFoodId + ',"rate":' + rate + '}';
-    var data = {movieId:curMovieId, foodId:curFoodId, shits:rate};
-    $.get('/postRate', data, reloadPage());
+    var data = '{ "curMovieId":' + curMovieId + ', "curFoodId":' + curFoodId + ',"rate":' + rate + '}';
+    //var data = {movieId:curMovieId, foodId:curFoodId, shits:rate};
+    $.post('/postRate', data, reloadPage());
 }
 
 function getInfo()
