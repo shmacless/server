@@ -35,7 +35,11 @@ $('#suggestions').click(function(){
 $('#submitSearch').click(function()
 {
     var searchWord = $('#searchFood').val();
-    $.post('/commitSearch',searchWord);
+    var jsom = {query:searchWord}
+    $.post('/commitSearch',jsom,function(data)
+    {
+        alert(data);
+    });
 });
 
 function suggestions()
