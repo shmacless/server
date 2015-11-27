@@ -3,7 +3,9 @@
  */
 var curFoodId = 1;
 var curMovieId = 2;
+
 reloadPage();
+
 
 function reloadPage()
 {
