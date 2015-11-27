@@ -22,15 +22,16 @@ h1 {
 }
 
 h3 {
-    color: #95a5a6;
+    color: beige;
     font-weight: 400;
+    font-size: 20px;
 }
 .img-responsive{
     height: 420px;
     width: 420px;
 }
 h4 {
-    color: beige;
+    color: #95a5a6;
     font-weight: 400;
     font-size: 20px;
 }

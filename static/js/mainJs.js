@@ -25,10 +25,21 @@ var foods = [['Black and White Affogato', 'http://tastykitchen.com/recipes/wp-co
 
 suggestions();
 
+var lastScrollTop = 0;
+$(window).scroll(function(event){
+    var st = $(this).scrollTop();
+    if (st > lastScrollTop){
+        $("#fork").animate({right:"-=20"});
+    } else {
+        $("#fork").animate({right:"+=20"});
+    }
+    lastScrollTop = st;
+});
+
 $('#suggestions').click(function(){
     $('html, body').animate({
         scrollTop: $( $.attr(this, 'href') ).offset().top
-    }, 500);
+    }, 1500);
     return false;
 });
 
