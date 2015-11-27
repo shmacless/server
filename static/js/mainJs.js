@@ -36,7 +36,7 @@ $('#submitSearch').click(function()
 {
     var searchWord = $('#searchFood').val();
     var jsom = {query:searchWord}
-    $.post('/commitSearch',jsom,function(data)
+    $.get('/commitSearch',jsom,function(data)
     {
         alert(data);
     });
