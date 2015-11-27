@@ -35,13 +35,13 @@ $('#suggestions').click(function(){
 $('#submitSearch').click(function()
 {
     var searchWord = $('#searchFood').val();
-    var jsom = {query:searchWord};
+    var json = {query:searchWord};
     alert("holly");
-    $.get('/commitSearch',jsom,function(data) {
+    $.get('/commitSearch',json,function(data) {
         alert("gi");
         data = $.parseJSON(data);
         alert(data);
-    }).done(function(data){alert(data)});
+    }).done(function(data){alert(data);}).fail(function(){alert("2");}).always(function(){alert("4");});
 });
 
 function suggestions()
