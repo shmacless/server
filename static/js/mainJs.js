@@ -42,7 +42,7 @@ $('#submitSearch').click(function()
         alert("gi");
         data = $.parseJSON(data);
         alert(data);
-    });
+    }).done(function(data){alert(data)});
 });
 
 function suggestions()
