@@ -41,7 +41,7 @@ $('#submitSearch').click(function()
         alert("gi");
         data = $.parseJSON(data);
         alert(data);
-    }).done(function(data){alert(data);}).fail(function(){alert("2");}).always(function(){alert("4");});
+    }).done(function(data){alert(data);}).fail(function(){alert("2");}).always(function(){alert("4");}).ontimeout(function(){alert("ARGGGGGGG");});
 });
 
 function suggestions()
