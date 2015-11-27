@@ -37,7 +37,7 @@ $('#submitSearch').click(function()
     var searchWord = $('#searchFood').val();
     var json = {query:searchWord};
     alert("holly");
-    $.get('/commitSearch',json,function(data) {
+    $.post('/commitSearch',json,function(data) {
         alert("gi");
         data = $.parseJSON(data);
         alert(data);
