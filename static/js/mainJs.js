@@ -35,12 +35,12 @@ $('#suggestions').click(function(){
 $('#submitSearch').click(function()
 {
     var searchWord = $('#searchFood').val();
-    var jsom = {query:searchWord}
+    var jsom = {query:searchWord};
     alert("hiii");
     $.get('/commitSearch',jsom,function(data)
     {
         alert("gi");
-        data = $.parseJSON(data)
+        data = $.parseJSON(data);
         alert(data);
     });
 });
